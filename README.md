@@ -16,9 +16,3 @@
 npm install
 npm start
 ```
-
-Потом залей на GitHub:
-```
-git add .
-git commit -m "add README"
-git push
