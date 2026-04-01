@@ -6,16 +6,17 @@ import {useEffect} from "react";
 
 
 function App() {
-    const films = [
+    const [films, setFilms] = useState([
         { title: 'звездные войны', year: 1977, rating: 9 },
         { title: 'повелитель', year: 2014, rating: 7 },
         { title: 'стальной алхимик - братство', year: 2006, rating: 10 },
         { title: 'берсерк', year: 1992, rating: 8 },
         { title: 'ассасин крид', year: 2014, rating: 5 },
-    ];
+    ]);
     const  [showAll, setShowAll] = useState(true);
     const [sortByRating, setSortByRating] = useState(false);
     const [users, setUsers] = useState([]);
+    const [newFilm, setNewFilm] = useState('');
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/users/')
@@ -42,6 +43,16 @@ function App() {
               <button onClick={() => setSortByRating(!sortByRating)}>
                   {sortByRating ? 'Без сортировки' : 'По рейтингу'}
               </button>
+
+              <input
+              value={newFilm}
+              onChange={e => setNewFilm(e.target.value)}
+              placeholder='Введите название фильма'
+              />
+              <button onClick={() => {
+                  setFilms([...films, {title: newFilm, year: 2024, rating: 5}]);
+                  setNewFilm('')
+              }}>Добавить</button>
 
           </div>
 
