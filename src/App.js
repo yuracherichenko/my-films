@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 import FilmCard from "./FilmCard";
+import {useEffect} from "react";
+
 
 function App() {
     const films = [
@@ -13,13 +15,20 @@ function App() {
     ];
     const  [showAll, setShowAll] = useState(true);
     const [sortByRating, setSortByRating] = useState(false);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users/')
+        .then(res => res.json())
+        .then(data => setUsers(data));
+    }, [])
 
 
     let filmRating = showAll ? films : films.filter(film => film.rating > 7);
     let filmsToRender = sortByRating
     ? [...filmRating].sort((a, b) => b.rating - a.rating)
         : filmRating;
-    let filmsToYear = [...films].sort((a, b) => a.year - b.year);
+
 
   return (
       <div className='app'>
@@ -37,8 +46,18 @@ function App() {
           </div>
 
           {filmsToRender.map(film => (
-              <FilmCard title={film.title}  year={film.year}  rating={film.rating} />
+              <FilmCard key={film.title} title={film.title}  year={film.year}  rating={film.rating} />
           ))}
+
+          <h2>Пользователи из API </h2>
+            <div>
+                {users.map((user) => (
+                    <p key={user.id}> {user.name} - {user.email} </p>
+                ))}
+            </div>
+
+
+
       </div>
   );
 }
