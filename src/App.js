@@ -3,6 +3,8 @@ import './App.css';
 import {useState} from "react";
 import FilmCard from "./FilmCard";
 import {useEffect} from "react";
+import { Routes, Route } from 'react-router-dom';
+import FilmPage from './FilmPage';
 
 
 function App() {
@@ -32,44 +34,54 @@ function App() {
 
 
   return (
-      <div className='app'>
+      <Routes>
+          <Route path="/" element={
+              <div className="app">
+                  {
+                      <div className='app'>
 
-        <h1>Мои любимые фильмы</h1>
-          <div className="buttons">
-              <button onClick={() => setShowAll(!showAll)}>
-                  {showAll ? 'Показать лучшие' : 'Показать все'}
+                          <h1>Мои любимые фильмы</h1>
+                          <div className="buttons">
+                              <button onClick={() => setShowAll(!showAll)}>
+                                  {showAll ? 'Показать лучшие' : 'Показать все'}
 
-              </button >
-              <button onClick={() => setSortByRating(!sortByRating)}>
-                  {sortByRating ? 'Без сортировки' : 'По рейтингу'}
-              </button>
+                              </button >
+                              <button onClick={() => setSortByRating(!sortByRating)}>
+                                  {sortByRating ? 'Без сортировки' : 'По рейтингу'}
+                              </button>
 
-              <input
-              value={newFilm}
-              onChange={e => setNewFilm(e.target.value)}
-              placeholder='Введите название фильма'
-              />
-              <button onClick={() => {
-                  setFilms([...films, {title: newFilm, year: 2024, rating: 5}]);
-                  setNewFilm('')
-              }}>Добавить</button>
+                              <input
+                                  value={newFilm}
+                                  onChange={e => setNewFilm(e.target.value)}
+                                  placeholder='Введите название фильма'
+                              />
+                              <button onClick={() => {
+                                  setFilms([...films, {title: newFilm, year: 2024, rating: 5}]);
+                                  setNewFilm('')
+                              }}>Добавить</button>
 
-          </div>
+                          </div>
 
-          {filmsToRender.map(film => (
-              <FilmCard key={film.title} title={film.title}  year={film.year}  rating={film.rating} />
-          ))}
+                          {filmsToRender.map(film => (
+                              <FilmCard key={film.title} title={film.title}  year={film.year}  rating={film.rating} />
+                          ))}
 
-          <h2>Пользователи из API </h2>
-            <div>
-                {users.map((user) => (
-                    <p key={user.id}> {user.name} - {user.email} </p>
-                ))}
-            </div>
+                          <h2>Пользователи из API </h2>
+                          <div>
+                              {users.map((user) => (
+                                  <p key={user.id}> {user.name} - {user.email} </p>
+                              ))}
+                          </div>
 
 
 
-      </div>
+                      </div>
+                  }
+              </div>
+          } />
+          <Route path="/film/:title" element={<FilmPage />} />
+      </Routes>
+
   );
 }
 
