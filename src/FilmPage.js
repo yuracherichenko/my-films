@@ -1,14 +1,15 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function FilmPage() {
-    const { title } = useParams();
+    const { state } = useLocation();
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div style={{padding:'20px'}}>
             <button onClick={() => navigate('/')}>← Назад</button>
-            <h1>{title}</h1>
-            <p>Страница фильма</p>
+            <h1>{state.title}</h1>
+            <p>Год выхода: {state.year}</p>
+            <p>Рейтинг: {state.rating}</p>
         </div>
     );
 }

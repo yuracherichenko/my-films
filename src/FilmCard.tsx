@@ -9,8 +9,8 @@ interface filmCardProps {
 function FilmCard({title, year, rating}: filmCardProps) {
     return (
         <div className='film-card'>
-            <h3><Link to={`/film/${title}`}>{title} </Link></h3>
-            <p>Год: {year}</p>
+            <h3><Link to={`/film/${title}`} state={{title, year,rating}}> {title} </Link></h3>
+            <p>Год: {year} </p>
             <p>Рейтинг: {rating}</p>
         </div>
     )
