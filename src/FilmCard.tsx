@@ -1,6 +1,12 @@
 import {Link} from "react-router-dom";
 
-function FilmCard({title, year, rating}) {
+interface filmCardProps {
+    title: string;
+    year: number;
+    rating: number;
+}
+
+function FilmCard({title, year, rating}: filmCardProps) {
     return (
         <div className='film-card'>
             <h3><Link to={`/film/${title}`}>{title} </Link></h3>

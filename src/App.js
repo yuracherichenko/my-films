@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
-import FilmCard from "./FilmCard";
+import FilmCard from './FilmCard';
 import {useEffect} from "react";
 import { Routes, Route } from 'react-router-dom';
 import FilmPage from './FilmPage';
