@@ -19,6 +19,7 @@ function App() {
     const [sortByRating, setSortByRating] = useState(false);
     const [users, setUsers] = useState([]);
     const [newFilm, setNewFilm] = useState('');
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/users/')
@@ -31,6 +32,8 @@ function App() {
     let filmsToRender = sortByRating
     ? [...filmRating].sort((a, b) => b.rating - a.rating)
         : filmRating;
+
+    filmsToRender = filmsToRender.filter(film => film.title.toLowerCase().includes(search.toLowerCase()));
 
 
   return (
@@ -54,6 +57,11 @@ function App() {
                                   value={newFilm}
                                   onChange={e => setNewFilm(e.target.value)}
                                   placeholder='Введите название фильма'
+                              />
+                              <input
+                                  value={search}
+                                  onChange={(e) => setSearch(e.target.value)}
+                                  placeholder="Поиск фильма..."
                               />
                               <button onClick={() => {
                                   setFilms([...films, {title: newFilm, year: 2024, rating: 5}]);
